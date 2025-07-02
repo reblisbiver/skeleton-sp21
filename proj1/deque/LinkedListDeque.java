@@ -1,6 +1,8 @@
 package deque;
 
-public class LinkedListDeque<T> {
+import org.junit.Test;
+
+public class LinkedListDeque<T> implements Deque<T>{
     private class TNode {
         private TNode prev;
         private T item;
@@ -20,14 +22,14 @@ public class LinkedListDeque<T> {
         sentinel.prev = sentinel;
         sentinel.next = sentinel;
     }
-
+    @Override
     public void addFirst(T item) {
         TNode newTNode = new TNode(item, sentinel.next);
         sentinel.next = newTNode;
         newTNode.prev = sentinel;
         size++;
     }
-
+    @Override
     public void addLast(T item) {
         TNode newTNode = new TNode(item, sentinel);
         sentinel.prev.next = newTNode;
@@ -36,17 +38,11 @@ public class LinkedListDeque<T> {
         size++;
     }
 
-    public boolean isEmpty() {
-        if (size == 0) {
-            return true;
-        }
-        return false;
-    }
-
+    @Override
     public int size() {
         return size;
     }
-
+    @Override
     public void printDeque() {
         int index = 0;
         TNode t = sentinel.next;
@@ -56,7 +52,7 @@ public class LinkedListDeque<T> {
             index++;
         }
     }
-
+    @Override
     public T removeFirst() {
         if (isEmpty()) {
             return null;
@@ -68,7 +64,7 @@ public class LinkedListDeque<T> {
             return returnValue;
         }
     }
-
+    @Override
     public T removeLast() {
         if (isEmpty()) {
             return null;
@@ -80,7 +76,7 @@ public class LinkedListDeque<T> {
             return returnValue;
         }
     }
-
+    @Override
     public T get(int index) {
         if (index >= size || index < 0) {
             return null;
